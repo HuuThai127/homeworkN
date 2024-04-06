@@ -25,31 +25,29 @@ public class TextEditor extends JFrame {
         fileTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         JScrollPane fileScrollPane = new JScrollPane(fileTree);
 
-        JButton openButton = new JButton("Open");
+        JButton openButton = new JButton("Mở");
         openButton.addActionListener(e -> openFile());
 
-        JButton saveButton = new JButton("Save");
+        JButton saveButton = new JButton("Lưu");
         saveButton.addActionListener(e -> saveFile());
 
-        JButton browseButton = new JButton("Browse");
-        browseButton.addActionListener(e -> browseDirectory());
 
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout());
         buttonPanel.add(openButton);
         buttonPanel.add(saveButton);
-        buttonPanel.add(browseButton);
+    
 
         Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
+        contentPane.add(buttonPanel, BorderLayout.SOUTH);
         contentPane.add(fileScrollPane, BorderLayout.WEST);
         contentPane.add(textScrollPane, BorderLayout.CENTER);
-        contentPane.add(buttonPanel, BorderLayout.SOUTH);
+
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600, 400);
-        setLocationRelativeTo(null);
+        setSize(489, 400);
     }
 
     private void openFile() {
@@ -77,10 +75,9 @@ public class TextEditor extends JFrame {
             String content = textArea.getText();
             try {
                 TextEditorController.saveToFile(fileName, content);
-                JOptionPane.showMessageDialog(this, "File saved successfully!");
+                JOptionPane.showMessageDialog(this, "Saved successfully!");
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Error saving file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error saving  " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
